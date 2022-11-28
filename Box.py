@@ -23,6 +23,7 @@ class Box:
         # 4 - Right
         # 5 - Top
         self.sides = [None] * 6;
+        self.regs = None;
         
     def AddSides(self):
         self.sides[1] = Cutout(self.w, self.h);

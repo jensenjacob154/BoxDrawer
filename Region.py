@@ -70,7 +70,7 @@ class Region:
             s = Cutout(self.dy, self.he);
                 
             for y in self.yPar:
-                s.CutSlot(0, self.x0 + self.dx * y)
+                s.CutSlot(0, self.y0 + self.dy * y)
                 
             s.Texturize(1,0);
             s.Texturize(3,0);

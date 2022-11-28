@@ -9,7 +9,7 @@ import math
 import math
 
 materialThickness = 6; # [mm]
-toothWidth = 12; # [mm]
+toothWidth = 6; # [mm]
 cutWidth = 600; #[mm]
 
 class Cutout:
@@ -153,6 +153,52 @@ class Cutout:
             else:
                 self.paths.append(Path(yT, xT));
     
+    def CutSlot2(self, isHorizontal, loca, tOffset = 0, tLength = 0):
+    
+        dim = self.dy;
+        yOffset = self.dx;
+        yDir = materialThickness;
+        xOffset = materialThickness + self.gbxo;
+        if (not isHorizontal):
+            dim = self.dx;
+            yOffset = self.dy;
+        
+        
+        yOffset = loca - materialThickness / 2;    
+        
+        if (tLength != 0):
+            dim = tLength;
+        
+        toothCount = round((dim-toothWidth - 2*materialThickness) / (2*toothWidth));
+        
+        if (toothCount < 1):
+            toothCount = 1;
+            
+        atw = (dim - 2*materialThickness) / (2*toothCount+1);
+        xOffset += atw;
+        xOffset += tOffset;
+        
+        for i in range(toothCount):
+            xT = [];
+            yT = [];
+            
+            xT.append(i*2*atw + xOffset);
+            xT.append(i*2*atw + atw + xOffset);
+            xT.append(i*2*atw + atw + xOffset);
+            xT.append(i*2*atw + xOffset);
+            xT.append(i*2*atw + xOffset);
+            
+            yT.append(yOffset);
+            yT.append(yOffset);
+            yT.append(yDir + yOffset);
+            yT.append(yDir + yOffset);
+            yT.append(yOffset);
+    
+            if (not isHorizontal):
+                self.paths.append(Path(xT, yT));
+            else:
+                self.paths.append(Path(yT, xT));
+    
     def CutSlot(self, isHorizontal, loca):
     
         dim = self.dy;
@@ -186,7 +232,7 @@ class Cutout:
         yT.append(yDir + yOffset);
         yT.append(yOffset);
 
-        self.paths.append(Path(xT, yT));
+        self.paths.append(Path(yT, xT));
     
     def GetBounds(self):
         return [max(xs), max(ys)];
