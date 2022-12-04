@@ -4,16 +4,16 @@ from Region import Region
 
 mainRegion = Region();
 
-mainRegion.AddVerticalPartition(0.25);
+mainRegion.AddVerticalPartition(0.256);
 mainRegion.AddVerticalPartition(0.50);
-mainRegion.AddVerticalPartition(0.75);
+mainRegion.AddVerticalPartition(0.744);
 
-mainRegion.AddHorizontalPartition(0.33);
+mainRegion.AddHorizontalPartition(0.34);
 mainRegion.AddHorizontalPartition(0.66);
 
 #mainRegion.AddSubregion(0, 1, silverware);
 
-b = Box(50*4+6*5, 50*3+6*4, 50);
+b = Box(50*4+6*5, 50*3+6*4, 80);
 #b.AddBottom();
 b.AddSides();
 b.AddRegions(mainRegion);
